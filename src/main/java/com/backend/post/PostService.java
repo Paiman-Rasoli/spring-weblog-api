@@ -24,4 +24,8 @@ public class PostService {
         }
         this.postRepository.save(post);
     }
+
+    public void deleteOne(Integer id){
+        this.postRepository.deleteById(id);
+    }
 }

@@ -1,8 +1,10 @@
 package com.backend.post;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+
 @Entity
 public class Post {
     @Id
@@ -17,14 +19,20 @@ public class Post {
     )
     private Integer id;
     private String title;
-    private String createdAt;
 
-    public Post(){}
-    public Post(Integer id , String title, String createdAt) {
+    private String body;
+    @CreationTimestamp
+    private Date createdAt;
+
+    public Post() {
+    }
+
+    public Post(Integer id, String title, String body) {
         this.id = id;
         this.title = title;
-        this.createdAt = createdAt;
+        this.body = body;
     }
+
     public Integer getId() {
         return id;
     }
@@ -41,11 +49,15 @@ public class Post {
         this.title = title;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getBody() {
+        return this.body;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public Date getCreatedAt() {
+        return this.createdAt;
     }
 }

@@ -2,6 +2,8 @@ package com.backend.post;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -19,14 +21,9 @@ public class PostController {
     // Records
     record CreatePostBody(
             String title,
-
-            @JsonFormat(
-                    shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy"
-            )
-            Date created
-    ){
-
-    }
+            String body
+    )
+    {}
     @GetMapping
     public List<Post> index(){
         return postService.allPosts();
@@ -36,7 +33,21 @@ public class PostController {
     public void create(@RequestBody CreatePostBody request){
         Post post = new Post();
         post.setTitle(request.title());
-        post.setCreatedAt("2022-12-02");
+        post.setBody(request.body());
         this.postService.create(post);
     }
+    record Response(Boolean deleted){public Response(Boolean deleted){this.deleted = deleted;}}
+    @DeleteMapping("{postId}")
+    public Response deletePost(@PathVariable("postId") Integer id){
+        try{
+            this.postService.deleteOne(id);
+            return new Response(true);
+        }catch (Exception e){
+            System.out.println(e);
+            return new Response(false);
+        }
+    }
+
+//    @PutMapping
+
 }
