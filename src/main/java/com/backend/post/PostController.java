@@ -30,11 +30,11 @@ public class PostController {
     }
 
     @PostMapping
-    public void create(@RequestBody CreatePostBody request){
+    public Post create(@RequestBody CreatePostBody request){
         Post post = new Post();
         post.setTitle(request.title());
         post.setBody(request.body());
-        this.postService.create(post);
+        return this.postService.create(post);
     }
     record Response(Boolean deleted){public Response(Boolean deleted){this.deleted = deleted;}}
     @DeleteMapping("{postId}")
