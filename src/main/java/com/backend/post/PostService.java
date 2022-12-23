@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class PostService {
     private final PostRepository postRepository;
@@ -13,5 +15,13 @@ public class PostService {
     }
     public List<Post> allPosts(){
         return postRepository.findAll();
+    }
+
+    public void create(Post post){
+        Optional<Post> findPost = postRepository.findByTitle(post.getTitle());
+        if(findPost.isPresent()){
+            throw new IllegalStateException("A post with title "+post.getTitle()+" already exist.");
+        }
+        this.postRepository.save(post);
     }
 }

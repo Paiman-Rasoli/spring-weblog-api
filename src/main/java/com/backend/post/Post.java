@@ -7,24 +7,24 @@ import java.util.Date;
 public class Post {
     @Id
     @SequenceGenerator(
-            name = "post_id'_sequence",
-            sequenceName = "post_id'_sequence"
+            name = "post_id_sequence",
+            sequenceName = "post_id_sequence",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "post_id'_sequence"
+            generator = "post_id_sequence"
     )
     private Integer id;
     private String title;
-    private Date createdAt;
+    private String createdAt;
 
     public Post(){}
-    public Post(Integer id , String title, Date createdAt) {
+    public Post(Integer id , String title, String createdAt) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
     }
-
     public Integer getId() {
         return id;
     }
@@ -41,11 +41,11 @@ public class Post {
         this.title = title;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }
