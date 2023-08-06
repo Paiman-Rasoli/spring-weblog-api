@@ -29,6 +29,11 @@ public class PostController {
         return postService.allPosts();
     }
 
+    @GetMapping("/{id}")
+    public Post getOnePost(@PathVariable Integer id){
+        return postService.getOnePost(id);
+    }
+
     @PostMapping
     public Post create(@RequestBody CreatePostBody request){
         Post post = new Post();

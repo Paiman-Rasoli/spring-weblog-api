@@ -15,6 +15,11 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public Post getOnePost(Integer id){
+        Optional<Post> post = postRepository.findById(id);
+       return  post.orElse(null);
+    }
+
     public Post create(Post post){
         Optional<Post> findPost = postRepository.findByTitle(post.getTitle());
         if(findPost.isPresent()){
