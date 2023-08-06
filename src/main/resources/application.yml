@@ -4,9 +4,9 @@ server:
     include-message: always
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/spring-weblog
+    url: jdbc:postgresql://localhost:5432/spring_weblog
     username: postgres
-    password: Asdf123
+    password: Asdf12345!
   jpa:
     hibernate:
       ddl-auto: update
